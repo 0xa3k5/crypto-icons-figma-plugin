@@ -13,7 +13,7 @@ import { useCallback, useState } from "preact/hooks";
 
 import styles from "./styles.css";
 import icons from "../icon-paths.json";
-import { CreateSvgFrame, ICryptoIcon } from "./types";
+import { CreateSvgFrame, ICryptoIcon, CreateAll } from "./types";
 import CryptoIconCard from "./components/CryptoIconCard";
 
 function Plugin() {
@@ -26,6 +26,9 @@ function Plugin() {
   const handleCreateSvg = useCallback(() => {
     emit<CreateSvgFrame>("CREATE_SVG_FRAME", selectedIcon);
   }, [selectedIcon]);
+  const handleCreateAll = useCallback(() => {
+    emit<CreateAll>("CREATE_ALL", icons);
+  }, []);
 
   const handleSearch = (input: string) => {
     setSearchValue(input);
@@ -66,11 +69,11 @@ function Plugin() {
       </Container>
       <VerticalSpace space="large" />
       <div class={styles.footer}>
-        <Text>
-          Selected: {selectedIcon.name} (${selectedIcon.symbol})
-        </Text>
+        <Button secondary fullWidth onClick={handleCreateAll}>
+          Create All
+        </Button>
         <Button fullWidth onClick={handleCreateSvg}>
-          Create Icon
+          Create Selected
         </Button>
       </div>
     </div>

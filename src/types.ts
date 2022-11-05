@@ -4,6 +4,10 @@ export interface CreateSvgFrame extends EventHandler {
   name: "CREATE_SVG_FRAME";
   handler: (icon: ICryptoIcon) => void;
 }
+export interface CreateAll extends EventHandler {
+  name: "CREATE_ALL";
+  handler: (icons: ICryptoIcon[]) => void;
+}
 
 export interface ICryptoIcon {
   symbol: string;
