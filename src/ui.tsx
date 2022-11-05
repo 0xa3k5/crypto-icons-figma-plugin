@@ -1,40 +1,31 @@
-import "!prismjs/themes/prism.css";
-
 import {
   Button,
-  Stack,
   Container,
-  RadioButtons,
   render,
-  SelectableItem,
   Text,
-  Textbox,
   VerticalSpace,
   SearchTextbox,
+  Divider,
 } from "@create-figma-plugin/ui";
 import { emit } from "@create-figma-plugin/utilities";
 import { h } from "preact";
-import { useCallback, useState, useEffect } from "preact/hooks";
-import CryptoIcon from "./components/CryptoIcon";
+import { useCallback, useState } from "preact/hooks";
 
-import styles from "./styles.css";
+import styles, { selected } from "./styles.css";
 import icons from "../icon-paths.json";
 import { CreateSvgFrame, ICryptoIcon } from "./types";
+import CryptoIconCard from "./components/CryptoIconCard";
 
 function Plugin() {
   const [shownIcons, setShownIcons] = useState<ICryptoIcon[] | null>(
-    icons.slice(0, 20)
+    icons.slice(0, 100)
   );
   const [searchValue, setSearchValue] = useState("");
-
   const [selectedIcon, setSelectedIcon] = useState<ICryptoIcon>(icons[0]);
 
-  const handleCreateSvg = useCallback(
-    function() {
-      emit<CreateSvgFrame>("CREATE_SVG_FRAME", selectedIcon);
-    },
-    [selectedIcon]
-  );
+  const handleCreateSvg = useCallback(() => {
+    emit<CreateSvgFrame>("CREATE_SVG_FRAME", selectedIcon);
+  }, [selectedIcon]);
 
   const handleSearch = (input: string) => {
     setSearchValue(input);
@@ -50,38 +41,39 @@ function Plugin() {
   };
 
   return (
-    <Container space="medium">
-      <Text>Hello there</Text>
-      <VerticalSpace space="large" />
+    <div>
       <SearchTextbox
         value={searchValue}
         placeholder="search"
         onValueInput={(input) => handleSearch(input.toLowerCase())}
       />
-      {shownIcons &&
-        shownIcons.map((i: ICryptoIcon) => {
-          return (
-            <div
-              style={{
-                display: "grid",
-              }}
-            >
-              <Stack space="large" style={{ backgroundColor: "#000" }}>
-                <button onClick={() => setSelectedIcon(i)}>
-                  <CryptoIcon icon={i} />
-                  {i.name}
-                </button>
-              </Stack>
-            </div>
-          );
-        })}
-      <Button fullWidth onClick={handleCreateSvg}>
-        Create
-      </Button>
-
+      <Divider />
       <VerticalSpace space="large" />
-      <VerticalSpace space="small" />
-    </Container>
+      <Container space="large" style={{ marginBottom: 40 }}>
+        {shownIcons && (
+          <div class={styles["icon-card-wrapper"]}>
+            {shownIcons.map((i: ICryptoIcon) => {
+              return (
+                <CryptoIconCard
+                  icon={i}
+                  isSelected={selectedIcon === i}
+                  setSelectedIcon={setSelectedIcon}
+                />
+              );
+            })}
+          </div>
+        )}
+      </Container>
+      <VerticalSpace space="large" />
+      <div class={styles.footer}>
+        <Text>
+          Selected: {selectedIcon.name} (${selectedIcon.symbol})
+        </Text>
+        <Button fullWidth onClick={handleCreateSvg}>
+          Create Icon
+        </Button>
+      </div>
+    </div>
   );
 }
 

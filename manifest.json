@@ -3,8 +3,8 @@
   "editorType": [
     "figma"
   ],
-  "id": "react-editor",
-  "name": "React Editor",
+  "id": "crypto-icons",
+  "name": "Crypto Icons",
   "main": "build/main.js",
   "ui": "build/ui.js"
 }

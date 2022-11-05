@@ -1,6 +1,8 @@
 declare const styles: {
-  readonly "container": string;
-  readonly "editor": string;
+  readonly "icon-card": string;
+  readonly "selected": string;
+  readonly "footer": string;
+  readonly "icon-card-wrapper": string;
 };
 export = styles;
 
