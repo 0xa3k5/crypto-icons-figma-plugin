@@ -9,6 +9,6 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/components/CryptoIcon.tsx",
-    "get-svg-data.ts"
+    "src/cmd/generate-svg-paths.ts"
   ]
 }

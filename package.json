@@ -21,7 +21,8 @@
     "typescript": "^4"
   },
   "scripts": {
-    "build": "build-figma-plugin --typecheck --minify",
+    "generate-paths": "rm -rf icon-paths.json && ts-node src/cmd/generate-svg-paths.ts",
+    "build": "yarn generate-paths build-figma-plugin --typecheck --minify",
     "watch": "build-figma-plugin --typecheck --watch"
   },
   "figma-plugin": {

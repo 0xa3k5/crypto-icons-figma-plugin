@@ -1,4 +1,6 @@
+.DS_STORE
 /build
 /node_modules
 .env
 yarn-error.log
+.gitignore

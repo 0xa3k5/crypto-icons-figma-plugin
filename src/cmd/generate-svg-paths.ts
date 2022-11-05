@@ -1,8 +1,8 @@
 import fs from "fs";
 import fsPromises from "fs/promises";
-import { ICryptoIcon } from "./src/types";
+import { ICryptoIcon } from "../types";
 
-const getSVGData = async () => {
+const generateSVGPaths = async () => {
   const iconsManifest = JSON.parse(
     fs
       .readFileSync("./node_modules/cryptocurrency-icons/manifest.json")
@@ -34,6 +34,4 @@ const getSVGData = async () => {
   });
 };
 
-getSVGData();
-
-export default getSVGData;
+generateSVGPaths();
