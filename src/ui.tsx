@@ -6,6 +6,7 @@ import {
   VerticalSpace,
   SearchTextbox,
   Divider,
+  Toggle,
 } from "@create-figma-plugin/ui";
 import { emit } from "@create-figma-plugin/utilities";
 import { h } from "preact";
@@ -22,13 +23,14 @@ function Plugin() {
   );
   const [searchValue, setSearchValue] = useState("");
   const [selectedIcon, setSelectedIcon] = useState<ICryptoIcon>(icons[0]);
+  const [asComponent, setAsComponent] = useState(true);
 
   const handleCreateSvg = useCallback(() => {
-    emit<CreateSvgFrame>("CREATE_SVG_FRAME", selectedIcon);
-  }, [selectedIcon]);
+    emit<CreateSvgFrame>("CREATE_SVG_FRAME", selectedIcon, asComponent);
+  }, [selectedIcon, asComponent]);
   const handleCreateAll = useCallback(() => {
-    emit<CreateAll>("CREATE_ALL", icons);
-  }, []);
+    emit<CreateAll>("CREATE_ALL", icons, asComponent);
+  }, [asComponent]);
 
   const handleSearch = (input: string) => {
     setSearchValue(input);
@@ -69,12 +71,21 @@ function Plugin() {
       </Container>
       <VerticalSpace space="large" />
       <div class={styles.footer}>
-        <Button secondary fullWidth onClick={handleCreateAll}>
-          Create All
-        </Button>
-        <Button fullWidth onClick={handleCreateSvg}>
-          Create Selected
-        </Button>
+        <Toggle
+          value={asComponent}
+          onChange={() => setAsComponent(!asComponent)}
+          // onChange={(event) => setAsComponent(event.currentTarget.checked)}
+        >
+          <Text>As Components</Text>
+        </Toggle>
+        <div class={styles["button-group"]}>
+          <Button secondary fullWidth onClick={handleCreateAll}>
+            Create All
+          </Button>
+          <Button fullWidth onClick={handleCreateSvg}>
+            Create Selected
+          </Button>
+        </div>
       </div>
     </div>
   );

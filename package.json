@@ -10,7 +10,7 @@
     ],
     "id": "crypto-icons",
     "name": "Crypto Icons",
-    "main": "src/main.ts",
+    "main": "src/plugin/main.ts",
     "ui": "src/ui.tsx"
   },
   "dependencies": {

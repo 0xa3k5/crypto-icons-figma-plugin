@@ -30,6 +30,12 @@
   background-color: var(--figma-color-bg);
 }
 
+.button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
 .icon-card-wrapper {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
