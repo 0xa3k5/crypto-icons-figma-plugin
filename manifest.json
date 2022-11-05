@@ -1,9 +1,7 @@
 {
   "api": "1.0.0",
-  "editorType": [
-    "figma"
-  ],
-  "id": "crypto-icons",
+  "editorType": ["figma"],
+  "id": "1170720285035693761",
   "name": "Crypto Icons",
   "main": "build/main.js",
   "ui": "build/ui.js"

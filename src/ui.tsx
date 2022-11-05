@@ -11,7 +11,7 @@ import { emit } from "@create-figma-plugin/utilities";
 import { h } from "preact";
 import { useCallback, useState } from "preact/hooks";
 
-import styles, { selected } from "./styles.css";
+import styles from "./styles.css";
 import icons from "../icon-paths.json";
 import { CreateSvgFrame, ICryptoIcon } from "./types";
 import CryptoIconCard from "./components/CryptoIconCard";
