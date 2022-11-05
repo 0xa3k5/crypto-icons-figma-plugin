@@ -1,0 +1,14 @@
+{
+  "extends": "@create-figma-plugin/tsconfig",
+  "compilerOptions": {
+    "typeRoots": ["node_modules/@figma", "node_modules/@types"],
+    "resolveJsonModule": true,
+    "module": "CommonJS"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/components/CryptoIcon.tsx",
+    "get-svg-data.ts"
+  ]
+}
