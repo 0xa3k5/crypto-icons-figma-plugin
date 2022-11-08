@@ -3,7 +3,7 @@
   "compilerOptions": {
     "typeRoots": ["node_modules/@figma", "node_modules/@types"],
     "resolveJsonModule": true,
-    "module": "CommonJS"
+    "module": "CommonJS",
   },
   "include": [
     "src/**/*.ts",

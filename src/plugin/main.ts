@@ -6,14 +6,22 @@ import CreateOneSvg from "./create-one-svg";
 export default function() {
   once<CreateSvgFrame>(
     "CREATE_SVG_FRAME",
-    (icon: ICryptoIcon, asComponent: boolean) => {
-      CreateOneSvg(icon, asComponent);
+    (
+      icon: ICryptoIcon,
+      asComponent: boolean,
+      variant: "black" | "icon" | "white" | "color"
+    ) => {
+      CreateOneSvg(icon, asComponent, variant);
     }
   );
   once<CreateAll>(
     "CREATE_ALL",
-    (icons: ICryptoIcon[], asComponent: boolean) => {
-      CreateAllSvg(icons, asComponent);
+    (
+      icons: ICryptoIcon[],
+      asComponent: boolean,
+      variant: "black" | "icon" | "white" | "color"
+    ) => {
+      CreateAllSvg(icons, asComponent, variant);
     }
   );
   showUI({ height: 600, width: 400 });

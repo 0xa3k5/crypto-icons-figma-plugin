@@ -1,7 +1,11 @@
 import { ICryptoIcon } from "../types";
 import FigmaSelectZoomClose from "./select-zoom-close";
 
-const CreateAllSvg = (icons: ICryptoIcon[], asComponent: boolean) => {
+const CreateAllSvg = (
+  icons: ICryptoIcon[],
+  asComponent: boolean,
+  variant: "black" | "icon" | "white" | "color"
+) => {
   const parentFrame = figma.createFrame();
   parentFrame.name = "Crypto Currency Icons";
   parentFrame.layoutMode = "VERTICAL";
@@ -31,8 +35,8 @@ const CreateAllSvg = (icons: ICryptoIcon[], asComponent: boolean) => {
     ];
     rows.push(rowFrame);
     rowIcons.forEach((icon) => {
-      const svgNode = figma.createNodeFromSvg(icon.path);
-      svgNode.name = icon.name;
+      const svgNode = figma.createNodeFromSvg(icon.path[`${variant}`]);
+      svgNode.name = `${icon.name}/${variant}`;
 
       if (asComponent) {
         const svgComponent = figma.createComponent();
