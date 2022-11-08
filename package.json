@@ -8,7 +8,7 @@
     "editorType": [
       "figma"
     ],
-    "id": "crypto-icons",
+    "id": "1170720285035693761",
     "name": "Crypto Icons",
     "main": "src/plugin/main.ts",
     "ui": "src/ui.tsx"
