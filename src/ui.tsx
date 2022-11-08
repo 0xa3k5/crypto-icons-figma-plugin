@@ -11,22 +11,22 @@ import {
 } from "@create-figma-plugin/ui";
 import { emit } from "@create-figma-plugin/utilities";
 import { h } from "preact";
-import { useCallback, useState, useEffect } from "preact/hooks";
-
 import { useCallback, useState } from "preact/hooks";
 import styles from "./styles.css";
 import icons from "../icon-paths.json";
 import { CreateSvgFrame, ICryptoIcon, CreateAll } from "./types";
-import CryptoIconCard from "./components/CryptoIconCard";
 import IconContent from "./components/IconContent";
 
 function Plugin() {
+  const pageIconSize = 100;
+  const [shownIcons, setShownIcons] = useState<ICryptoIcon[]>(
+    icons.slice(0, pageIconSize)
+  );
+  let shownCount = shownIcons.length;
   const [variant, setVariant] = useState<"black" | "color" | "icon" | "white">(
     "color"
   );
-  const [shownIcons, setShownIcons] = useState<ICryptoIcon[] | null>(
-    icons.slice(0, 100)
-  );
+
   const [searchValue, setSearchValue] = useState("");
   const [selectedIcon, setSelectedIcon] = useState<ICryptoIcon>(icons[0]);
   const [asComponent, setAsComponent] = useState(true);
@@ -60,24 +60,9 @@ function Plugin() {
     setVariant(e.target.value);
   };
 
-  const displayShownIcons = () => {
-    return (
-      <div>
-        <VerticalSpace space="large" />
-        <div class={styles["icon-card-wrapper"]}>
-          {shownIcons?.map((i: ICryptoIcon) => {
-            return (
-              <CryptoIconCard
-                icon={i}
-                variant={variant}
-                isSelected={selectedIcon === i}
-                setSelectedIcon={setSelectedIcon}
-              />
-            );
-          })}
-        </div>
-      </div>
-    );
+  const handleShowMore = () => {
+    shownCount = shownCount + pageIconSize;
+    setShownIcons(icons.slice(0, shownCount));
   };
 
   const tabOptions = [
@@ -141,6 +126,12 @@ function Plugin() {
           value={variant}
           onChange={(e) => handleTabSwitch(e)}
         />
+        <VerticalSpace space="large" />
+        {icons.length > shownIcons.length && (
+          <Button secondary fullWidth onClick={handleShowMore}>
+            Show More
+          </Button>
+        )}
         <VerticalSpace space="large" />
       </Container>
       <div class={styles.footer}>
