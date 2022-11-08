@@ -13,10 +13,12 @@ import { emit } from "@create-figma-plugin/utilities";
 import { h } from "preact";
 import { useCallback, useState, useEffect } from "preact/hooks";
 
+import { useCallback, useState } from "preact/hooks";
 import styles from "./styles.css";
 import icons from "../icon-paths.json";
 import { CreateSvgFrame, ICryptoIcon, CreateAll } from "./types";
 import CryptoIconCard from "./components/CryptoIconCard";
+import IconContent from "./components/IconContent";
 
 function Plugin() {
   const [variant, setVariant] = useState<"black" | "color" | "icon" | "white">(
@@ -78,6 +80,53 @@ function Plugin() {
     );
   };
 
+  const tabOptions = [
+    {
+      children: (
+        <IconContent
+          variant={variant}
+          shownIcons={shownIcons}
+          selectedIcon={selectedIcon}
+          setSelectedIcon={setSelectedIcon}
+        />
+      ),
+      value: "color",
+    },
+    {
+      children: (
+        <IconContent
+          variant={variant}
+          shownIcons={shownIcons}
+          selectedIcon={selectedIcon}
+          setSelectedIcon={setSelectedIcon}
+        />
+      ),
+      value: "black",
+    },
+    {
+      children: (
+        <IconContent
+          variant={variant}
+          shownIcons={shownIcons}
+          selectedIcon={selectedIcon}
+          setSelectedIcon={setSelectedIcon}
+        />
+      ),
+      value: "white",
+    },
+    {
+      children: (
+        <IconContent
+          variant={variant}
+          shownIcons={shownIcons}
+          selectedIcon={selectedIcon}
+          setSelectedIcon={setSelectedIcon}
+        />
+      ),
+      value: "icon",
+    },
+  ];
+
   return (
     <div>
       <SearchTextbox
@@ -88,12 +137,7 @@ function Plugin() {
       <Divider />
       <Container space="large" style={{ marginBottom: 40 }}>
         <Tabs
-          options={[
-            { children: displayShownIcons(), value: "color" },
-            { children: displayShownIcons(), value: "black" },
-            { children: displayShownIcons(), value: "white" },
-            { children: displayShownIcons(), value: "icon" },
-          ]}
+          options={tabOptions}
           value={variant}
           onChange={(e) => handleTabSwitch(e)}
         />
